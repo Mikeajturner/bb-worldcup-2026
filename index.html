@@ -1146,31 +1146,10 @@ const UPLOAD_PRESET = 'bb_sweepstake'; // unsigned upload preset — create this
 let photos = {}; // { "south_africa": "https://res.cloudinary.com/..." }
 
 async function loadPhotos() {
-  // Load from localStorage cache first (instant)
+  // Load from localStorage cache only — no server fetch needed
   const saved = localStorage.getItem('bb_sweepstake_photos_v2');
   if (saved) {
     try { photos = JSON.parse(saved); } catch(e) {}
-  }
-  // Then fetch latest from Cloudinary in background
-  try {
-    const res = await fetch(
-      `https://res.cloudinary.com/${CLOUDINARY_CLOUD}/image/list/bb_sweepstake.json`
-    );
-    if (res.ok) {
-      const data = await res.json();
-      const updated = {};
-      (data.resources || []).forEach(r => {
-        updated[r.public_id.replace('bb_sweepstake/', '')] = 
-          `${CLOUDINARY_FETCH_URL}/w_400,h_400,c_fill,g_face/${r.public_id}`;
-      });
-      if (Object.keys(updated).length > 0) {
-        photos = updated;
-        localStorage.setItem('bb_sweepstake_photos_v2', JSON.stringify(photos));
-        renderTeams();
-      }
-    }
-  } catch(e) {
-    console.log('Using cached photos');
   }
 }
 
@@ -1211,22 +1190,24 @@ function handlePhotoUpload(event, team) {
           formData.append('public_id', `bb_sweepstake/${teamKey}`);
           formData.append('folder', 'bb_sweepstake');
 
+          console.log('Uploading to Cloudinary...', CLOUDINARY_UPLOAD_URL);
           const res = await fetch(CLOUDINARY_UPLOAD_URL, {
             method: 'POST',
             body: formData
           });
           const result = await res.json();
+          console.log('Cloudinary response:', result);
 
           if (result.secure_url) {
-            photos[teamKey] = `${CLOUDINARY_FETCH_URL}/w_400,h_400,c_fill,g_face/${result.public_id}`;
+            photos[teamKey] = result.secure_url;
             localStorage.setItem('bb_sweepstake_photos_v2', JSON.stringify(photos));
             renderTeams();
           } else {
-            throw new Error(result.error?.message || 'Upload failed');
+            throw new Error(result.error?.message || JSON.stringify(result));
           }
         } catch(err) {
           console.error('Upload error:', err);
-          alert('Photo upload failed: ' + err.message + '\n\nMake sure the upload preset bb_sweepstake exists in Cloudinary.');
+          alert('Photo upload failed: ' + err.message);
           if (heroEl) heroEl.style.opacity = '1';
         }
       }, 'image/jpeg', 0.85);
