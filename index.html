@@ -1146,10 +1146,32 @@ const UPLOAD_PRESET = 'bb_sweepstake'; // unsigned upload preset — create this
 let photos = {}; // { "south_africa": "https://res.cloudinary.com/..." }
 
 async function loadPhotos() {
-  // Load from localStorage cache only — no server fetch needed
+  // Load from localStorage cache first (instant display)
   const saved = localStorage.getItem('bb_sweepstake_photos_v2');
   if (saved) {
     try { photos = JSON.parse(saved); } catch(e) {}
+  }
+  // Then fetch all photos from Cloudinary so everyone sees everyone's pics
+  try {
+    const res = await fetch(
+      `https://res.cloudinary.com/${CLOUDINARY_CLOUD}/image/list/bb_sweepstake.json`
+    );
+    if (res.ok) {
+      const data = await res.json();
+      const updated = {};
+      (data.resources || []).forEach(r => {
+        const key = r.public_id.replace('bb_sweepstake/', '');
+        updated[key] = `https://res.cloudinary.com/${CLOUDINARY_CLOUD}/image/upload/w_400,h_400,c_fill,g_face/${r.public_id}`;
+      });
+      if (Object.keys(updated).length > 0) {
+        // Merge with any locally stored photos
+        photos = { ...photos, ...updated };
+        localStorage.setItem('bb_sweepstake_photos_v2', JSON.stringify(photos));
+        renderTeams();
+      }
+    }
+  } catch(e) {
+    console.log('Using cached photos only:', e.message);
   }
 }
 
