@@ -1146,32 +1146,28 @@ const UPLOAD_PRESET = 'bb_sweepstake'; // unsigned upload preset — create this
 let photos = {}; // { "south_africa": "https://res.cloudinary.com/..." }
 
 async function loadPhotos() {
-  // Load from localStorage cache first (instant display)
+  // Load from localStorage cache first
   const saved = localStorage.getItem('bb_sweepstake_photos_v2');
   if (saved) {
     try { photos = JSON.parse(saved); } catch(e) {}
   }
-  // Then fetch all photos from Cloudinary so everyone sees everyone's pics
+  // Fetch shared photos from Cloudinary tag list
   try {
-    const res = await fetch(
-      `https://res.cloudinary.com/${CLOUDINARY_CLOUD}/image/list/bbwc2026.json`
-    );
+    const res = await fetch(`https://res.cloudinary.com/${CLOUDINARY_CLOUD}/image/list/bbwc2026.json`);
     if (res.ok) {
       const data = await res.json();
-      const updated = {};
       (data.resources || []).forEach(r => {
-        const key = r.public_id.replace('bb_sweepstake/', '');
-        updated[key] = `https://res.cloudinary.com/${CLOUDINARY_CLOUD}/image/upload/w_400,h_400,c_fill,g_face/${r.public_id}`;
+        // Extract team key from public_id — handle any folder depth
+        const parts = r.public_id.split('/');
+        const key = parts[parts.length - 1]; // last segment is always the team key
+        const url = `https://res.cloudinary.com/${CLOUDINARY_CLOUD}/image/upload/v${r.version}/${r.public_id}.${r.format}`;
+        photos[key] = url;
       });
-      if (Object.keys(updated).length > 0) {
-        // Merge with any locally stored photos
-        photos = { ...photos, ...updated };
-        localStorage.setItem('bb_sweepstake_photos_v2', JSON.stringify(photos));
-        renderTeams();
-      }
+      localStorage.setItem('bb_sweepstake_photos_v2', JSON.stringify(photos));
+      renderTeams();
     }
   } catch(e) {
-    console.log('Using cached photos only:', e.message);
+    console.log('Photo sync skipped:', e.message);
   }
 }
 
@@ -1209,8 +1205,7 @@ function handlePhotoUpload(event, team) {
           const formData = new FormData();
           formData.append('file', blob, 'photo.jpg');
           formData.append('upload_preset', UPLOAD_PRESET);
-          formData.append('public_id', `bb_sweepstake/${teamKey}`);
-          formData.append('folder', 'bb_sweepstake');
+          formData.append('public_id', teamKey);
           formData.append('tags', 'bbwc2026');
 
           console.log('Uploading to Cloudinary...', CLOUDINARY_UPLOAD_URL);
@@ -1224,7 +1219,6 @@ function handlePhotoUpload(event, team) {
           if (result.secure_url) {
             photos[teamKey] = result.secure_url;
             console.log('Stored photo key:', teamKey, 'url:', result.secure_url);
-            console.log('All photos:', JSON.stringify(photos));
             localStorage.setItem('bb_sweepstake_photos_v2', JSON.stringify(photos));
             renderTeams();
           } else {
