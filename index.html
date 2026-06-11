@@ -1200,6 +1200,8 @@ function handlePhotoUpload(event, team) {
 
           if (result.secure_url) {
             photos[teamKey] = result.secure_url;
+            console.log('Stored photo key:', teamKey, 'url:', result.secure_url);
+            console.log('All photos:', JSON.stringify(photos));
             localStorage.setItem('bb_sweepstake_photos_v2', JSON.stringify(photos));
             renderTeams();
           } else {
