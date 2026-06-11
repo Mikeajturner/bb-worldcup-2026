@@ -1154,7 +1154,7 @@ async function loadPhotos() {
   // Then fetch all photos from Cloudinary so everyone sees everyone's pics
   try {
     const res = await fetch(
-      `https://res.cloudinary.com/${CLOUDINARY_CLOUD}/image/list/bb_sweepstake_tag.json`
+      `https://res.cloudinary.com/${CLOUDINARY_CLOUD}/image/list/bbwc2026.json`
     );
     if (res.ok) {
       const data = await res.json();
@@ -1211,7 +1211,7 @@ function handlePhotoUpload(event, team) {
           formData.append('upload_preset', UPLOAD_PRESET);
           formData.append('public_id', `bb_sweepstake/${teamKey}`);
           formData.append('folder', 'bb_sweepstake');
-          formData.append('tags', 'bb_sweepstake_tag');
+          formData.append('tags', 'bbwc2026');
 
           console.log('Uploading to Cloudinary...', CLOUDINARY_UPLOAD_URL);
           const res = await fetch(CLOUDINARY_UPLOAD_URL, {
