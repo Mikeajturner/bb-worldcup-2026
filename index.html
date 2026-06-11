@@ -1024,8 +1024,8 @@ const FLAGS = {
 // ════════════════════════════════════════════════
 async function init() {
   // Baked-in assignments are source of truth
-  loadPhotos();
-  await fetchFixtures();
+  await fetchFixtures(); // load fixtures first so teams render
+  loadPhotos();          // then load shared photos async
 }
 
 async function fetchFixtures() {
@@ -1136,14 +1136,41 @@ function renderTeams() {
 }
 
 // ════════════════════════════════════════════════
-// PHOTO UPLOAD
+// PHOTO UPLOAD — Cloudinary shared storage
 // ════════════════════════════════════════════════
-let photos = {}; // { "England": "data:image/..." }
+const CLOUDINARY_CLOUD = 'dokeest8m';
+const CLOUDINARY_UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`;
+const CLOUDINARY_FETCH_URL = `https://res.cloudinary.com/${CLOUDINARY_CLOUD}/image/upload`;
+const UPLOAD_PRESET = 'bb_sweepstake'; // unsigned upload preset — create this in Cloudinary
 
-function loadPhotos() {
-  const saved = localStorage.getItem('bb_sweepstake_photos');
+let photos = {}; // { "south_africa": "https://res.cloudinary.com/..." }
+
+async function loadPhotos() {
+  // Load from localStorage cache first (instant)
+  const saved = localStorage.getItem('bb_sweepstake_photos_v2');
   if (saved) {
     try { photos = JSON.parse(saved); } catch(e) {}
+  }
+  // Then fetch latest from Cloudinary in background
+  try {
+    const res = await fetch(
+      `https://res.cloudinary.com/${CLOUDINARY_CLOUD}/image/list/bb_sweepstake.json`
+    );
+    if (res.ok) {
+      const data = await res.json();
+      const updated = {};
+      (data.resources || []).forEach(r => {
+        updated[r.public_id.replace('bb_sweepstake/', '')] = 
+          `${CLOUDINARY_FETCH_URL}/w_400,h_400,c_fill,g_face/${r.public_id}`;
+      });
+      if (Object.keys(updated).length > 0) {
+        photos = updated;
+        localStorage.setItem('bb_sweepstake_photos_v2', JSON.stringify(photos));
+        renderTeams();
+      }
+    }
+  } catch(e) {
+    console.log('Using cached photos');
   }
 }
 
@@ -1156,33 +1183,53 @@ function handlePhotoUpload(event, team) {
   const file = event.target.files[0];
   if (!file) return;
 
-  // Compress & convert to base64
+  const teamKey = team.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+  const heroEl = document.querySelector(`#photo_${teamKey}`)?.closest('.team-card-hero');
+  if (heroEl) {
+    heroEl.style.opacity = '0.5';
+    const overlay = heroEl.querySelector('.hero-overlay');
+    if (overlay) overlay.style.opacity = '1', overlay.textContent = '⏳ Uploading…';
+  }
+
+  // Compress first
   const reader = new FileReader();
   reader.onload = e => {
     const img = new Image();
     img.onload = () => {
       const canvas = document.createElement('canvas');
-      const size = 200; // max 200x200px
+      const size = 400;
       const scale = Math.min(size / img.width, size / img.height);
       canvas.width = img.width * scale;
       canvas.height = img.height * scale;
-      const ctx = canvas.getContext('2d');
-      // Circular crop
-      ctx.beginPath();
-      ctx.arc(canvas.width/2, canvas.height/2, Math.min(canvas.width, canvas.height)/2, 0, Math.PI*2);
-      ctx.clip();
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      const compressed = canvas.toDataURL('image/jpeg', 0.75);
-      photos[team] = compressed;
-      try {
-        localStorage.setItem('bb_sweepstake_photos', JSON.stringify(photos));
-      } catch(e) {
-        // localStorage full — clear oldest photos
-        console.warn('Storage full, clearing old photos');
-        photos = { [team]: compressed };
-        localStorage.setItem('bb_sweepstake_photos', JSON.stringify(photos));
-      }
-      renderTeams(); // re-render to show new photo
+      canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      canvas.toBlob(async blob => {
+        try {
+          const formData = new FormData();
+          formData.append('file', blob, 'photo.jpg');
+          formData.append('upload_preset', UPLOAD_PRESET);
+          formData.append('public_id', `bb_sweepstake/${teamKey}`);
+          formData.append('folder', 'bb_sweepstake');
+
+          const res = await fetch(CLOUDINARY_UPLOAD_URL, {
+            method: 'POST',
+            body: formData
+          });
+          const result = await res.json();
+
+          if (result.secure_url) {
+            photos[teamKey] = `${CLOUDINARY_FETCH_URL}/w_400,h_400,c_fill,g_face/${result.public_id}`;
+            localStorage.setItem('bb_sweepstake_photos_v2', JSON.stringify(photos));
+            renderTeams();
+          } else {
+            throw new Error(result.error?.message || 'Upload failed');
+          }
+        } catch(err) {
+          console.error('Upload error:', err);
+          alert('Photo upload failed: ' + err.message + '\n\nMake sure the upload preset bb_sweepstake exists in Cloudinary.');
+          if (heroEl) heroEl.style.opacity = '1';
+        }
+      }, 'image/jpeg', 0.85);
     };
     img.src = e.target.result;
   };
