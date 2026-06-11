@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B&B World Cup 2026 🏆</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bb-teal: #3BBFAD;
+    --bb-teal-dark: #2A9D8F;
+    --bb-teal-light: #E8F8F6;
+    --bb-coral: #E8635A;
+    --bb-coral-light: #FDF0EF;
+    --bb-gold: #F4A732;
+    --bb-gold-light: #FEF6E7;
+    --bb-navy: #1D2B3A;
+    --bb-dark: #FFFFFF;
+    --bb-mid: #F7F5F2;
+    --bb-surface: #FFFFFF;
+    --bb-border: #E8E4DF;
+    --bb-text: #1D2B3A;
+    --bb-muted: #6B7A8D;
+    --radius: 16px;
+    --card-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #F7F5F2;
+    color: var(--bb-text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: #FFFFFF;
+    border-bottom: 3px solid var(--bb-teal);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: 40%;
+    background: linear-gradient(135deg, var(--bb-teal-light) 0%, rgba(244,167,50,0.08) 100%);
+    clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
+    pointer-events: none;
+  }
+  .header-inner {
+    position: relative;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 32px 24px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .header-logo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 10px;
+  }
+  .header-logo img {
+    height: 48px;
+    width: auto;
+  }
+  .header-logo-divider {
+    width: 2px;
+    height: 40px;
+    background: var(--bb-border);
+  }
+  .header-logo-tagline {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--bb-muted);
+  }
+  .header-title h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    line-height: 0.95;
+    letter-spacing: 2px;
+    color: var(--bb-navy);
+  }
+  .header-title h1 .accent-teal { color: var(--bb-teal-dark); }
+  .header-title h1 .accent-coral { color: var(--bb-coral); }
+  .header-title p {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    color: var(--bb-muted);
+    font-weight: 500;
+    letter-spacing: 0.3px;
+  }
+  .header-badges {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .header-badge {
+    background: var(--bb-mid);
+    border: 1.5px solid var(--bb-border);
+    border-radius: 14px;
+    padding: 14px 18px;
+    text-align: center;
+    min-width: 80px;
+  }
+  .header-badge .num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem;
+    line-height: 1;
+    color: var(--bb-teal-dark);
+  }
+  .header-badge .label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--bb-muted);
+    font-weight: 600;
+    margin-top: 2px;
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: #FFFFFF;
+    border-bottom: 1px solid var(--bb-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .nav-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    gap: 4px;
+    padding: 0 16px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .nav-btn {
+    padding: 14px 20px;
+    background: none;
+    border: none;
+    color: var(--bb-muted);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
+  }
+  .nav-btn:hover { color: var(--bb-navy); }
+  .nav-btn.active {
+    color: var(--bb-teal-dark);
+    border-bottom-color: var(--bb-teal);
+  }
+
+  /* ── MAIN LAYOUT ── */
+  .main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 32px 16px 80px;
+    background: #F7F5F2;
+  }
+
+  /* ── SECTION TOGGLE ── */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* ── TEAMS GRID ── */
+  .teams-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 1px;
+    color: var(--bb-navy);
+  }
+  .section-title span { color: var(--bb-teal-dark); }
+
+  .upload-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: var(--bb-teal);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .upload-btn:hover { background: var(--bb-teal-dark); transform: translateY(-1px); }
+
+  #fileInput { display: none; }
+
+  .teams-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+
+  .team-card {
+    background: #FFFFFF;
+    border: 1.5px solid var(--bb-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: default;
+    position: relative;
+  }
+  .team-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(59,191,173,0.15);
+    border-color: var(--bb-teal);
+  }
+  .team-card-flag {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+    background: var(--bb-mid);
+  }
+  .team-card-flag-placeholder {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: var(--bb-mid);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+  }
+  .team-card-body {
+    padding: 12px 14px 14px;
+  }
+  .team-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.15rem;
+    letter-spacing: 0.5px;
+    color: var(--bb-navy);
+    line-height: 1.1;
+    margin-bottom: 6px;
+  }
+  .team-group {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--bb-teal);
+    margin-bottom: 8px;
+  }
+  .team-person {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .person-avatar-wrap {
+    position: relative;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+  .person-avatar-wrap:hover .avatar-overlay { opacity: 1; }
+  .person-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--bb-teal), #26A69A);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 700;
+    color: white;
+    overflow: hidden;
+    border: 2px solid rgba(255,255,255,0.1);
+    transition: border-color 0.2s;
+  }
+  .person-avatar-wrap:hover .person-avatar { border-color: var(--bb-teal); }
+  .person-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .avatar-overlay {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: rgba(0,137,123,0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+    font-size: 0.9rem;
+  }
+  .person-info { flex: 1; min-width: 0; }
+  .person-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--bb-navy);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .photo-hint {
+    font-size: 0.65rem;
+    color: var(--bb-teal);
+    margin-top: 2px;
+    cursor: pointer;
+    opacity: 0.8;
+  }
+  .photo-hint:hover { opacity: 1; }
+  .unassigned-badge {
+    font-size: 0.75rem;
+    color: var(--bb-muted);
+    font-style: italic;
+  }
+  .photo-input { display: none; }
+
+  .group-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    color: var(--bb-muted);
+    margin: 32px 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--bb-border);
+    text-transform: uppercase;
+  }
+  .group-label:first-of-type { margin-top: 0; }
+
+  /* ── MATCHES / FIXTURES ── */
+  .matches-controls {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .filter-btn {
+    padding: 8px 16px;
+    background: #FFFFFF;
+    border: 1.5px solid var(--bb-border);
+    border-radius: 8px;
+    color: var(--bb-muted);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--bb-teal-dark);
+    border-color: var(--bb-teal-dark);
+    color: white;
+  }
+
+  .match-day-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--bb-teal-dark);
+    margin: 28px 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .match-day-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--bb-border);
+  }
+
+  .match-card {
+    background: #FFFFFF;
+    border: 1.5px solid var(--bb-border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .match-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+  .match-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--bb-teal);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .match-card.bb-match::before { opacity: 1; }
+  .match-card.bb-match {
+    border-color: rgba(59,191,173,0.35);
+    background: linear-gradient(135deg, var(--bb-teal-light) 0%, #FFFFFF 60%);
+  }
+  .match-card.live {
+    border-color: rgba(232,99,90,0.4);
+    background: linear-gradient(135deg, var(--bb-coral-light) 0%, #FFFFFF 60%);
+  }
+  .match-card.live::before { background: var(--bb-coral); opacity: 1; }
+
+  .match-team {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .match-team.right { align-items: flex-end; text-align: right; }
+
+  .match-team-flag {
+    width: 40px;
+    height: 27px;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+  }
+  .match-team-flag-emoji {
+    font-size: 1.6rem;
+    line-height: 1;
+  }
+  .match-team-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    color: var(--bb-navy);
+  }
+  .match-team-person {
+    font-size: 0.75rem;
+    color: var(--bb-teal);
+    font-weight: 600;
+  }
+
+  .match-centre {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    min-width: 80px;
+  }
+  .match-score {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 3px;
+    color: var(--bb-navy);
+    line-height: 1;
+  }
+  .match-score.pending { color: var(--bb-muted); font-size: 1.5rem; }
+  .match-time {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--bb-muted);
+    text-align: center;
+    line-height: 1.4;
+  }
+  .match-venue {
+    font-size: 0.65rem;
+    color: var(--bb-muted);
+    text-align: center;
+  }
+
+  .live-badge {
+    display: inline-block;
+    background: var(--bb-coral);
+    color: white;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 4px;
+    animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+
+  .bb-tag {
+    display: inline-block;
+    background: rgba(0,137,123,0.2);
+    color: var(--bb-teal);
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  .no-matches {
+    text-align: center;
+    padding: 60px 24px;
+    color: var(--bb-muted);
+    font-size: 1rem;
+    background: #FFFFFF;
+    border-radius: var(--radius);
+    border: 1.5px dashed var(--bb-border);
+  }
+
+  /* ── UPLOAD / SETUP ── */
+  .setup-panel {
+    background: #FFFFFF;
+    border: 1.5px solid var(--bb-border);
+    border-radius: var(--radius);
+    padding: 32px;
+    margin-bottom: 32px;
+  }
+  .setup-panel h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+  .setup-panel p {
+    color: var(--bb-muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .setup-panel code {
+    background: var(--bb-mid);
+    border: 1px solid var(--bb-border);
+    border-radius: 6px;
+    padding: 2px 7px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--bb-gold);
+  }
+  .setup-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 20px 0;
+  }
+  .setup-step {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .step-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--bb-teal);
+    color: white;
+    font-weight: 700;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .step-text {
+    font-size: 0.875rem;
+    color: var(--bb-text);
+    line-height: 1.6;
+  }
+  .drop-zone {
+    border: 2px dashed rgba(0,137,123,0.4);
+    border-radius: var(--radius);
+    padding: 40px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: rgba(0,137,123,0.04);
+  }
+  .drop-zone:hover, .drop-zone.dragover {
+    border-color: var(--bb-teal);
+    background: rgba(0,137,123,0.1);
+  }
+  .drop-zone-icon { font-size: 2.5rem; margin-bottom: 12px; }
+  .drop-zone p { color: var(--bb-muted); font-size: 0.9rem; }
+  .drop-zone strong { color: var(--bb-teal); }
+
+  .status-bar {
+    background: rgba(0,137,123,0.1);
+    border: 1px solid rgba(0,137,123,0.3);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 0.85rem;
+    color: var(--bb-teal);
+    display: none;
+    margin-top: 16px;
+  }
+  .status-bar.error {
+    background: rgba(255,107,107,0.1);
+    border-color: rgba(255,107,107,0.3);
+    color: var(--bb-coral);
+  }
+
+  /* ── STANDINGS ── */
+  .standings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+  }
+  .standings-group {
+    background: var(--bb-surface);
+    border: 1px solid var(--bb-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .standings-group-header {
+    background: linear-gradient(135deg, var(--bb-teal-dark) 0%, var(--bb-teal) 100%);
+    color: white;
+    padding: 12px 16px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+  }
+  .standings-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+  }
+  .standings-table th {
+    padding: 8px 12px;
+    text-align: left;
+    color: var(--bb-muted);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--bb-border);
+  }
+  .standings-table th:not(:first-child) { text-align: center; }
+  .standings-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--bb-border);
+    vertical-align: middle;
+  }
+  .standings-table td:not(:first-child) { text-align: center; color: var(--bb-muted); }
+  .standings-table tr:last-child td { border-bottom: none; }
+  .standings-table tr.qualify td:first-child {
+    border-left: 3px solid var(--bb-teal);
+  }
+  .standings-table tr.qualify-3rd td:first-child {
+    border-left: 3px solid var(--bb-gold);
+  }
+  .pos-num {
+    display: inline-flex;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.06);
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    margin-right: 6px;
+    color: var(--bb-muted);
+  }
+  .team-cell {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    color: var(--bb-navy);
+  }
+  .person-tag-sm {
+    font-size: 0.65rem;
+    color: var(--bb-teal);
+    font-weight: 500;
+  }
+  .pts-cell { font-weight: 700; color: var(--bb-navy) !important; }
+
+  /* ── TODAY'S MATCHES BANNER ── */
+  .today-banner {
+    background: linear-gradient(135deg, var(--bb-teal-light), rgba(244,167,50,0.08));
+    border: 1.5px solid rgba(59,191,173,0.3);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    display: none;
+  }
+  .today-banner.has-matches { display: block; }
+  .today-banner h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    color: var(--bb-teal-dark);
+    margin-bottom: 12px;
+  }
+  .today-match-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #FFFFFF;
+    border: 1px solid var(--bb-border);
+    border-radius: 8px;
+    padding: 6px 12px;
+    margin: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+  .today-match-pill .vs { color: var(--bb-muted); font-size: 0.7rem; }
+
+  /* ── LOADING ── */
+  .loading {
+    text-align: center;
+    padding: 60px;
+    color: var(--bb-muted);
+  }
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--bb-border);
+    border-top-color: var(--bb-teal-dark);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 16px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--bb-navy);
+    border-top: none;
+    padding: 20px;
+    text-align: center;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.5);
+  }
+  footer strong { color: var(--bb-teal); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .teams-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+    .match-card { padding: 12px; gap: 8px; }
+    .match-score { font-size: 1.5rem; }
+    .header-inner { padding: 28px 16px 24px; }
+    .header-badge { display: none; }
+    .standings-grid { grid-template-columns: 1fr; }
+    .main { padding: 20px 12px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-title">
+      <div class="header-logo">
+        <img src="https://www.birdandblendtea.com/cdn/shop/files/Bird-and-blend-tea-co-brand-logo.png?v=1683122128"
+             alt="Bird &amp; Blend Tea Co." onerror="this.style.display='none'">
+        <div class="header-logo-divider"></div>
+        <span class="header-logo-tagline">Office Sweepstake</span>
+      </div>
+      <h1><span class="accent-teal">World Cup</span> <span class="accent-coral">2026</span> 🏆</h1>
+      <p>Who's going to lift the trophy for Bird &amp; Blend? ☕⚽</p>
+    </div>
+    <div class="header-badges">
+      <div class="header-badge">
+        <div class="num" id="hdr-teams">48</div>
+        <div class="label">Teams</div>
+      </div>
+      <div class="header-badge">
+        <div class="num" id="hdr-matches">104</div>
+        <div class="label">Matches</div>
+      </div>
+      <div class="header-badge">
+        <div class="num" id="hdr-assigned">0</div>
+        <div class="label">Assigned</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-inner">
+    <button class="nav-btn active" onclick="showSection('teams')">🌍 Teams</button>
+    <button class="nav-btn" onclick="showSection('matches')">⚽ Fixtures &amp; Results</button>
+    <button class="nav-btn" onclick="showSection('standings')">📊 Standings</button>
+    <button class="nav-btn" onclick="showSection('setup')">⚙️ Setup</button>
+  </div>
+</nav>
+
+<main class="main">
+
+  <!-- ── TEAMS SECTION ── -->
+  <section class="section active" id="section-teams">
+    <div class="teams-header">
+      <div class="section-title">THE <span>TEAMS</span></div>
+      <button class="upload-btn" onclick="document.getElementById('fileInput').click()">
+        📋 Upload Assignments
+      </button>
+      <input type="file" id="fileInput" accept=".csv,.xlsx,.xls" onchange="handleFileUpload(event)">
+    </div>
+
+    <div id="today-banner" class="today-banner">
+      <h3>⚽ Playing Today</h3>
+      <div id="today-pills"></div>
+    </div>
+
+    <div id="teams-container">
+      <div class="loading">
+        <div class="loading-spinner"></div>
+        <p>Loading teams &amp; fixtures…</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── MATCHES SECTION ── -->
+  <section class="section" id="section-matches">
+    <div class="teams-header">
+      <div class="section-title">FIXTURES &amp; <span>RESULTS</span></div>
+    </div>
+    <div class="matches-controls">
+      <button class="filter-btn active" onclick="filterMatches('all', this)">All Matches</button>
+      <button class="filter-btn" onclick="filterMatches('today', this)">Today</button>
+      <button class="filter-btn" onclick="filterMatches('bb', this)">🎯 B&amp;B Clashes</button>
+      <button class="filter-btn" onclick="filterMatches('upcoming', this)">Upcoming</button>
+      <button class="filter-btn" onclick="filterMatches('results', this)">Results</button>
+    </div>
+    <div id="matches-container">
+      <div class="loading">
+        <div class="loading-spinner"></div>
+        <p>Loading fixtures…</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── STANDINGS SECTION ── -->
+  <section class="section" id="section-standings">
+    <div class="teams-header">
+      <div class="section-title">GROUP <span>STANDINGS</span></div>
+    </div>
+    <div id="standings-container">
+      <div class="loading">
+        <div class="loading-spinner"></div>
+        <p>Calculating standings…</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SETUP SECTION ── -->
+  <section class="section" id="section-setup">
+    <div class="section-title" style="margin-bottom:24px;">⚙️ <span>SETUP</span></div>
+
+    <div class="setup-panel">
+      <h2>Upload Team Assignments</h2>
+      <p>Create a spreadsheet with your team assignments and upload it here. The site will instantly update to show who has which team.</p>
+
+      <div class="setup-steps">
+        <div class="setup-step">
+          <div class="step-num">1</div>
+          <div class="step-text">Create a CSV or Excel file with two columns: <code>Team</code> and <code>Person</code></div>
+        </div>
+        <div class="setup-step">
+          <div class="step-num">2</div>
+          <div class="step-text">Team names must match exactly — e.g. <code>England</code>, <code>Brazil</code>, <code>South Korea</code>, <code>Bosnia &amp; Herzegovina</code></div>
+        </div>
+        <div class="setup-step">
+          <div class="step-num">3</div>
+          <div class="step-text">Upload below. Changes are instant and live — no page reload needed.</div>
+        </div>
+      </div>
+
+      <p>Example CSV format:</p>
+      <div style="background:var(--bb-mid);border:1px solid var(--bb-border);border-radius:8px;padding:16px;font-family:'Space Mono',monospace;font-size:0.8rem;color:var(--bb-gold);margin-bottom:20px;line-height:1.8;">
+        Team,Person<br>
+        England,Mike Turner<br>
+        Brazil,Ellie Smith<br>
+        Germany,James Chen<br>
+        France,Sarah Johnson
+      </div>
+
+      <div class="drop-zone" id="dropZone" onclick="document.getElementById('fileInput').click()"
+           ondragover="handleDragOver(event)" ondrop="handleDrop(event)" ondragleave="this.classList.remove('dragover')">
+        <div class="drop-zone-icon">📂</div>
+        <p><strong>Click to upload</strong> or drag &amp; drop your CSV/Excel file here</p>
+        <p style="margin-top:6px;font-size:0.8rem;">Supports .csv, .xlsx, .xls</p>
+      </div>
+      <div class="status-bar" id="statusBar"></div>
+    </div>
+
+    <div class="setup-panel">
+      <h2>All 48 World Cup Teams</h2>
+      <p>Copy this list to help fill in your spreadsheet. These are the exact team names to use:</p>
+      <div id="team-list-for-csv" style="background:var(--bb-mid);border:1px solid var(--bb-border);border-radius:8px;padding:16px;font-family:'Space Mono',monospace;font-size:0.75rem;color:var(--bb-muted);line-height:1.8;max-height:300px;overflow-y:auto;margin-top:12px;">
+        Loading…
+      </div>
+      <button class="upload-btn" style="margin-top:12px;" onclick="downloadTemplate()">📥 Download Template CSV</button>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>🍵 <strong>Bird &amp; Blend Tea Co.</strong> · World Cup 2026 Sweepstake · Data from openfootball.github.io</p>
+</footer>
+
+<script>
+// ════════════════════════════════════════════════
+// DATA STORE
+// ════════════════════════════════════════════════
+let allMatches = [];
+let assignments = {
+  "France": "Shona Macdonald",
+  "Belgium": "Phoebe Muchmore",
+  "Scotland": "Jordan Sly",
+  "Canada": "Megan Bond",
+  "Sweden": "Milly Muxworthy",
+  "Spain": "Tamsin Sayers",
+  "Bosnia & Herzegovina": "Katie Jelliss",
+  "Ecuador": "Laura Kirk",
+  "Argentina": "Hannah Philpott",
+  "South Korea": "Zoe Regan",
+  "Netherlands": "Alix Thompson-Burn",
+  "Morocco": "Catherine Loftus",
+  "Germany": "Helen Kimber",
+  "Japan": "Vic Holt",
+  "Portugal": "Ben Watts",
+  "Norway": "Freya Stone",
+  "South Africa": "Mike Turner",
+  "DR Congo": "Ryan Balani",
+  "Uruguay": "Gemma Burdfield"
+}; // pre-loaded — upload CSV in Setup tab to update
+let groupData = {};   // { "Group A": ["Mexico","South Africa","South Korea","Czech Republic"] }
+let currentFilter = 'all';
+
+// Country flag emojis map
+const FLAGS = {
+  "Mexico": "🇲🇽", "South Africa": "🇿🇦", "South Korea": "🇰🇷", "Czech Republic": "🇨🇿",
+  "Canada": "🇨🇦", "Bosnia & Herzegovina": "🇧🇦", "Qatar": "🇶🇦", "Switzerland": "🇨🇭",
+  "Brazil": "🇧🇷", "Morocco": "🇲🇦", "Haiti": "🇭🇹", "Scotland": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+  "USA": "🇺🇸", "Paraguay": "🇵🇾", "Australia": "🇦🇺", "Turkey": "🇹🇷",
+  "Germany": "🇩🇪", "Curaçao": "🇨🇼", "Ivory Coast": "🇨🇮", "Ecuador": "🇪🇨",
+  "France": "🇫🇷", "Saudi Arabia": "🇸🇦", "Belgium": "🇧🇪", "Japan": "🇯🇵",
+  "Argentina": "🇦🇷", "New Zealand": "🇳🇿", "South Korea": "🇰🇷", "Colombia": "🇨🇴",
+  "Norway": "🇳🇴", "DR Congo": "🇨🇩", "Netherlands": "🇳🇱", "Egypt": "🇪🇬",
+  "England": "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "Algeria": "🇩🇿", "Senegal": "🇸🇳", "Ghana": "🇬🇭",
+  "Spain": "🇪🇸", "Cape Verde": "🇨🇻", "Portugal": "🇵🇹", "Iraq": "🇮🇶",
+  "Uruguay": "🇺🇾", "Iran": "🇮🇷", "Austria": "🇦🇹", "Sweden": "🇸🇪",
+  "Panama": "🇵🇦", "Jordan": "🇯🇴", "Croatia": "🇭🇷", "Tunisia": "🇹🇳",
+  "Uzbekistan": "🇺🇿",
+};
+
+// ════════════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════════════
+async function init() {
+  // Baked-in assignments are source of truth
+  loadPhotos();
+  await fetchFixtures();
+}
+
+async function fetchFixtures() {
+  try {
+    const res = await fetch('https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json');
+    const data = await res.json();
+    allMatches = data.matches || [];
+    buildGroupData();
+    render();
+  } catch(e) {
+    document.getElementById('teams-container').innerHTML = `
+      <div class="no-matches">
+        ⚠️ Could not load live data. Check your internet connection.
+      </div>`;
+  }
+}
+
+function buildGroupData() {
+  groupData = {};
+  allMatches.forEach(m => {
+    if (!m.group) return;
+    if (!groupData[m.group]) groupData[m.group] = new Set();
+    if (!m.team1.startsWith('W') && !m.team1.match(/^\d/)) groupData[m.group].add(m.team1);
+    if (!m.team2.startsWith('W') && !m.team2.match(/^\d/)) groupData[m.group].add(m.team2);
+  });
+  // Convert sets to arrays
+  for (let g in groupData) groupData[g] = Array.from(groupData[g]);
+}
+
+// ════════════════════════════════════════════════
+// NAVIGATION
+// ════════════════════════════════════════════════
+function showSection(name) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('section-' + name).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+// ════════════════════════════════════════════════
+// RENDER ALL
+// ════════════════════════════════════════════════
+function render() {
+  renderTeams();
+  renderMatches(currentFilter);
+  renderStandings();
+  renderTodayBanner();
+  updateHeader();
+  populateTeamList();
+}
+
+function updateHeader() {
+  const assigned = Object.keys(assignments).length;
+  document.getElementById('hdr-assigned').textContent = assigned;
+}
+
+// ════════════════════════════════════════════════
+// TEAMS
+// ════════════════════════════════════════════════
+function renderTeams() {
+  const container = document.getElementById('teams-container');
+  const groups = Object.keys(groupData).sort();
+
+  if (groups.length === 0) {
+    container.innerHTML = '<div class="no-matches">No team data available.</div>';
+    return;
+  }
+
+  let html = '';
+  groups.forEach(group => {
+    html += `<div class="group-label">${group}</div>`;
+    html += `<div class="teams-grid">`;
+    groupData[group].forEach(team => {
+      const person = assignments[team];
+      const flag = FLAGS[team] || '🏳️';
+      const teamKey = team.replace(/[^a-z0-9]/gi, '_');
+      const photoData = photos[team] || null;
+      const initials = person ? person.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase() : '';
+      const avatarInner = photoData
+        ? `<img src="${photoData}" alt="${person}">`
+        : initials;
+
+      html += `
+        <div class="team-card">
+          <div class="team-card-flag-placeholder">${flag}</div>
+          <div class="team-card-body">
+            <div class="team-name">${team}</div>
+            <div class="team-group">${group}</div>
+            <div class="team-person">
+              ${person ? `
+                <div class="person-avatar-wrap" onclick="triggerPhotoUpload('${teamKey}')" title="Click to add/change photo">
+                  <div class="person-avatar">${avatarInner}</div>
+                  <div class="avatar-overlay">📷</div>
+                  <input class="photo-input" type="file" id="photo_${teamKey}" accept="image/*"
+                    onchange="handlePhotoUpload(event, '${team}')">
+                </div>
+                <div class="person-info">
+                  <div class="person-name">${person}</div>
+                  <div class="photo-hint" onclick="triggerPhotoUpload('${teamKey}')">
+                    ${photoData ? '✏️ Change photo' : '📷 Add photo'}
+                  </div>
+                </div>
+              ` : `<span class="unassigned-badge">Unassigned</span>`}
+            </div>
+          </div>
+        </div>`;
+    });
+    html += `</div>`;
+  });
+
+  container.innerHTML = html;
+}
+
+// ════════════════════════════════════════════════
+// PHOTO UPLOAD
+// ════════════════════════════════════════════════
+let photos = {}; // { "England": "data:image/..." }
+
+function loadPhotos() {
+  const saved = localStorage.getItem('bb_sweepstake_photos');
+  if (saved) {
+    try { photos = JSON.parse(saved); } catch(e) {}
+  }
+}
+
+function triggerPhotoUpload(teamKey) {
+  const input = document.getElementById('photo_' + teamKey);
+  if (input) input.click();
+}
+
+function handlePhotoUpload(event, team) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  // Compress & convert to base64
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const size = 200; // max 200x200px
+      const scale = Math.min(size / img.width, size / img.height);
+      canvas.width = img.width * scale;
+      canvas.height = img.height * scale;
+      const ctx = canvas.getContext('2d');
+      // Circular crop
+      ctx.beginPath();
+      ctx.arc(canvas.width/2, canvas.height/2, Math.min(canvas.width, canvas.height)/2, 0, Math.PI*2);
+      ctx.clip();
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      const compressed = canvas.toDataURL('image/jpeg', 0.75);
+      photos[team] = compressed;
+      try {
+        localStorage.setItem('bb_sweepstake_photos', JSON.stringify(photos));
+      } catch(e) {
+        // localStorage full — clear oldest photos
+        console.warn('Storage full, clearing old photos');
+        photos = { [team]: compressed };
+        localStorage.setItem('bb_sweepstake_photos', JSON.stringify(photos));
+      }
+      renderTeams(); // re-render to show new photo
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+// ════════════════════════════════════════════════
+// MATCHES
+// ════════════════════════════════════════════════
+function parseMatchDateTime(match) {
+  // Times are in UTC-offset format, convert to UTC for comparison
+  try {
+    const dateStr = match.date; // "2026-06-11"
+    const timeStr = match.time; // "13:00 UTC-6"
+    const parts = timeStr.match(/(\d+):(\d+)\s+UTC([+-]\d+)/);
+    if (!parts) return new Date(dateStr);
+    const [,h,m,offset] = parts;
+    const offsetMs = parseInt(offset) * 3600000;
+    const d = new Date(`${dateStr}T${h.padStart(2,'0')}:${m}:00Z`);
+    return new Date(d.getTime() - offsetMs); // subtract offset to get UTC
+  } catch(e) {
+    return new Date(match.date);
+  }
+}
+
+function formatMatchTime(match) {
+  const dt = parseMatchDateTime(match);
+  const londonTime = dt.toLocaleString('en-GB', {
+    timeZone: 'Europe/London',
+    hour: '2-digit',
+    minute: '2-digit',
+    day: 'numeric',
+    month: 'short'
+  });
+  return londonTime;
+}
+
+function isBBMatch(match) {
+  return assignments[match.team1] || assignments[match.team2];
+}
+
+function isToday(match) {
+  const today = new Date().toISOString().slice(0,10);
+  return match.date === today;
+}
+
+function isUpcoming(match) {
+  return !match.score;
+}
+
+function hasResult(match) {
+  return !!match.score;
+}
+
+function filterMatches(type, btn) {
+  currentFilter = type;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderMatches(type);
+}
+
+function renderMatches(filter) {
+  const container = document.getElementById('matches-container');
+  let matches = allMatches.filter(m => {
+    // Exclude pure knockout placeholders from display until resolved
+    const bothPlaceholders = m.team1.match(/^[W1-9L]/) && m.team2.match(/^[W1-9L]/);
+    if (bothPlaceholders) return false;
+    if (filter === 'today') return isToday(m);
+    if (filter === 'bb') return isBBMatch(m);
+    if (filter === 'upcoming') return isUpcoming(m);
+    if (filter === 'results') return hasResult(m);
+    return true; // 'all'
+  });
+
+  if (matches.length === 0) {
+    container.innerHTML = `<div class="no-matches">
+      ${filter === 'bb' ? '📋 Upload your team assignments first to see B&B clashes!' : 'No matches found for this filter.'}
+    </div>`;
+    return;
+  }
+
+  // Group by date
+  const byDate = {};
+  matches.forEach(m => {
+    if (!byDate[m.date]) byDate[m.date] = [];
+    byDate[m.date].push(m);
+  });
+
+  let html = '';
+  const today = new Date().toISOString().slice(0,10);
+
+  Object.keys(byDate).sort().forEach(date => {
+    const label = date === today ? '⚽ Today — ' + formatDate(date) : formatDate(date);
+    html += `<div class="match-day-label">${label}</div>`;
+    byDate[date].forEach(m => {
+      html += renderMatchCard(m);
+    });
+  });
+
+  container.innerHTML = html;
+}
+
+function renderMatchCard(match) {
+  const p1 = assignments[match.team1];
+  const p2 = assignments[match.team2];
+  const photo1 = photos[match.team1];
+  const photo2 = photos[match.team2];
+  const isBB = p1 || p2;
+  const isLive = isToday(match) && !match.score; // rough live detection
+  const flag1 = FLAGS[match.team1] || '🏳️';
+  const flag2 = FLAGS[match.team2] || '🏳️';
+
+  let scoreHtml = '';
+  if (match.score) {
+    const ft = match.score.ft;
+    scoreHtml = `<div class="match-score">${ft[0]}–${ft[1]}</div>`;
+  } else if (isToday(match)) {
+    scoreHtml = `<div class="match-score pending">vs</div><div class="live-badge">LIVE</div>`;
+  } else {
+    scoreHtml = `<div class="match-score pending">vs</div>`;
+  }
+
+  const timeStr = formatMatchTime(match);
+  const roundLabel = match.group ? match.group : (match.round || '');
+
+  return `
+    <div class="match-card ${isBB ? 'bb-match' : ''} ${isLive ? 'live' : ''}">
+      <div class="match-team">
+        <span class="match-team-flag-emoji">${flag1}</span>
+        <span class="match-team-name">${match.team1}</span>
+        ${p1 ? `<span class="match-team-person">${photo1 ? `<img src="${photo1}" style="width:18px;height:18px;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:3px;">` : '👤 '}${p1}</span>` : ''}
+      </div>
+      <div class="match-centre">
+        ${scoreHtml}
+        <div class="match-time">${timeStr} UK</div>
+        <div class="match-venue">${match.ground || ''}</div>
+        ${isBB ? `<span class="bb-tag">B&amp;B</span>` : ''}
+        ${roundLabel ? `<span style="font-size:0.6rem;color:var(----bb-muted);margin-top:2px;">${roundLabel}</span>` : ''}
+      </div>
+      <div class="match-team right">
+        <span class="match-team-flag-emoji">${flag2}</span>
+        <span class="match-team-name">${match.team2}</span>
+        ${p2 ? `<span class="match-team-person">${photo2 ? `<img src="${photo2}" style="width:18px;height:18px;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:3px;">` : '👤 '}${p2}</span>` : ''}
+      </div>
+    </div>`;
+}
+
+// ════════════════════════════════════════════════
+// STANDINGS
+// ════════════════════════════════════════════════
+function renderStandings() {
+  const container = document.getElementById('standings-container');
+  const groups = Object.keys(groupData).sort();
+
+  // Calculate standings from match results
+  const standing = {}; // { team: {p,w,d,l,gf,ga,pts} }
+
+  allMatches.forEach(m => {
+    if (!m.score || !m.group) return;
+    [m.team1, m.team2].forEach(t => {
+      if (!standing[t]) standing[t] = {p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0};
+    });
+    const [g1,g2] = m.score.ft;
+    standing[m.team1].p++; standing[m.team2].p++;
+    standing[m.team1].gf += g1; standing[m.team1].ga += g2;
+    standing[m.team2].gf += g2; standing[m.team2].ga += g1;
+    if (g1 > g2) {
+      standing[m.team1].w++; standing[m.team1].pts += 3;
+      standing[m.team2].l++;
+    } else if (g1 < g2) {
+      standing[m.team2].w++; standing[m.team2].pts += 3;
+      standing[m.team1].l++;
+    } else {
+      standing[m.team1].d++; standing[m.team1].pts++;
+      standing[m.team2].d++; standing[m.team2].pts++;
+    }
+  });
+
+  let html = '<div class="standings-grid">';
+  groups.forEach(group => {
+    const teams = groupData[group].map(t => ({
+      name: t,
+      ...(standing[t] || {p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0})
+    })).sort((a,b) => b.pts - a.pts || (b.gf-b.ga) - (a.gf-a.ga) || b.gf - a.gf);
+
+    html += `
+      <div class="standings-group">
+        <div class="standings-group-header">${group}</div>
+        <table class="standings-table">
+          <thead>
+            <tr>
+              <th>Team</th>
+              <th>P</th><th>W</th><th>D</th><th>L</th>
+              <th>GD</th><th>Pts</th>
+            </tr>
+          </thead>
+          <tbody>`;
+
+    teams.forEach((t, i) => {
+      const person = assignments[t.name];
+      const qualify = i < 2 ? 'qualify' : (i === 2 ? 'qualify-3rd' : '');
+      const gd = t.gf - t.ga;
+      html += `
+        <tr class="${qualify}">
+          <td>
+            <div class="team-cell">
+              <span class="pos-num">${i+1}</span>
+              ${FLAGS[t.name] || '🏳️'} ${t.name}
+              ${person ? `<span class="person-tag-sm">${person.split(' ')[0]}</span>` : ''}
+            </div>
+          </td>
+          <td>${t.p}</td><td>${t.w}</td><td>${t.d}</td><td>${t.l}</td>
+          <td>${gd > 0 ? '+' : ''}${gd}</td>
+          <td class="pts-cell">${t.pts}</td>
+        </tr>`;
+    });
+
+    html += `</tbody></table></div>`;
+  });
+  html += '</div>';
+  html += `<p style="margin-top:16px;font-size:0.75rem;color:var(--bb-muted);">
+    🟢 Top 2 qualify automatically &nbsp;·&nbsp; 🟡 Best 8 third-placed teams also qualify
+  </p>`;
+
+  container.innerHTML = html;
+}
+
+// ════════════════════════════════════════════════
+// TODAY BANNER
+// ════════════════════════════════════════════════
+function renderTodayBanner() {
+  const todayMatches = allMatches.filter(m => isToday(m));
+  const banner = document.getElementById('today-banner');
+  const pills = document.getElementById('today-pills');
+
+  if (todayMatches.length === 0) {
+    banner.classList.remove('has-matches');
+    return;
+  }
+
+  banner.classList.add('has-matches');
+  pills.innerHTML = todayMatches.map(m => {
+    const p1 = assignments[m.team1] ? assignments[m.team1].split(' ')[0] : null;
+    const p2 = assignments[m.team2] ? assignments[m.team2].split(' ')[0] : null;
+    const f1 = FLAGS[m.team1] || '🏳️';
+    const f2 = FLAGS[m.team2] || '🏳️';
+    const time = formatMatchTime(m).split(',')[0]; // just time
+    return `
+      <span class="today-match-pill">
+        ${f1} ${p1 ? `<strong>${p1}'s</strong>` : ''} ${m.team1}
+        <span class="vs">${m.score ? m.score.ft.join('-') : 'vs'}</span>
+        ${f2} ${p2 ? `<strong>${p2}'s</strong>` : ''} ${m.team2}
+        <span style="color:var(--bb-muted);font-size:0.65rem;">${time}</span>
+      </span>`;
+  }).join('');
+}
+
+// ════════════════════════════════════════════════
+// FILE UPLOAD — CSV / EXCEL
+// ════════════════════════════════════════════════
+function handleFileUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  processFile(file);
+}
+
+function handleDragOver(e) {
+  e.preventDefault();
+  e.currentTarget.classList.add('dragover');
+}
+
+function handleDrop(e) {
+  e.preventDefault();
+  e.currentTarget.classList.remove('dragover');
+  const file = e.dataTransfer.files[0];
+  if (file) processFile(file);
+}
+
+function processFile(file) {
+  const ext = file.name.split('.').pop().toLowerCase();
+  const status = document.getElementById('statusBar');
+  status.style.display = 'block';
+  status.className = 'status-bar';
+  status.textContent = '⏳ Processing file…';
+
+  if (ext === 'csv') {
+    const reader = new FileReader();
+    reader.onload = e => parseCSV(e.target.result);
+    reader.readAsText(file);
+  } else if (ext === 'xlsx' || ext === 'xls') {
+    // For Excel, we parse it as CSV approximation using a simple approach
+    status.textContent = '⚠️ For best results, please save your Excel file as CSV first (File → Save As → CSV).';
+    status.className = 'status-bar error';
+    // Still try to read it as text
+    const reader = new FileReader();
+    reader.onload = e => parseCSV(e.target.result);
+    reader.readAsText(file);
+  } else {
+    status.textContent = '❌ Please upload a .csv or .xlsx file.';
+    status.className = 'status-bar error';
+  }
+}
+
+function parseCSV(text) {
+  const status = document.getElementById('statusBar');
+  try {
+    const lines = text.split(/\r?\n/).filter(l => l.trim());
+    const newAssignments = {};
+    let skipped = 0;
+    let count = 0;
+
+    // Skip header row if it contains "team" or "person"
+    const startRow = lines[0].toLowerCase().includes('team') ? 1 : 0;
+
+    for (let i = startRow; i < lines.length; i++) {
+      // Handle quoted CSV values
+      const cols = parseCSVLine(lines[i]);
+      if (cols.length < 2) continue;
+      const team = cols[0].trim();
+      const person = cols[1].trim();
+      if (!team || !person) continue;
+      newAssignments[team] = person;
+      count++;
+    }
+
+    if (count === 0) {
+      status.textContent = '❌ No valid rows found. Check your file has Team and Person columns.';
+      status.className = 'status-bar error';
+      return;
+    }
+
+    assignments = newAssignments;
+    localStorage.setItem('bb_sweepstake_assignments', JSON.stringify(assignments));
+    render();
+    status.textContent = `✅ Loaded ${count} team assignments! The site has updated.`;
+    status.className = 'status-bar';
+  } catch(e) {
+    status.textContent = '❌ Error reading file: ' + e.message;
+    status.className = 'status-bar error';
+  }
+}
+
+function parseCSVLine(line) {
+  const result = [];
+  let cur = '';
+  let inQuotes = false;
+  for (let i = 0; i < line.length; i++) {
+    if (line[i] === '"') {
+      inQuotes = !inQuotes;
+    } else if (line[i] === ',' && !inQuotes) {
+      result.push(cur);
+      cur = '';
+    } else {
+      cur += line[i];
+    }
+  }
+  result.push(cur);
+  return result;
+}
+
+// ════════════════════════════════════════════════
+// TEMPLATE DOWNLOAD
+// ════════════════════════════════════════════════
+function populateTeamList() {
+  const el = document.getElementById('team-list-for-csv');
+  const allTeams = Object.values(groupData).flat().sort();
+  el.innerHTML = allTeams.map(t => `Team,Person → <span style="color:var(--bb-gold)">${t}</span>,`).join('<br>');
+}
+
+function downloadTemplate() {
+  const allTeams = Object.values(groupData).flat().sort();
+  const rows = ['Team,Person', ...allTeams.map(t => `${t},`)];
+  const blob = new Blob([rows.join('\n')], {type: 'text/csv'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'bb_sweepstake_2026.csv';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ════════════════════════════════════════════════
+// UTILS
+// ════════════════════════════════════════════════
+function formatDate(dateStr) {
+  return new Date(dateStr + 'T12:00:00').toLocaleDateString('en-GB', {
+    weekday: 'long', day: 'numeric', month: 'long'
+  });
+}
+
+// Auto-refresh every 2 minutes for live scores
+setInterval(() => fetchFixtures(), 120000);
+
+// Kick off
+init();
+</script>
+</body>
+</html>
