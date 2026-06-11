@@ -1101,7 +1101,7 @@ function renderTeams() {
     groupData[group].forEach(team => {
       const person = assignments[team];
       const flag = FLAGS[team] || '🏳️';
-      const teamKey = team.replace(/[^a-z0-9]/gi, '_');
+      const teamKey = team.replace(/[^a-z0-9]/gi, '_').toLowerCase();
       const photoData = photos[teamKey] || photos[team] || null;
       const initials = person ? person.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase() : '';
       const avatarInner = photoData
