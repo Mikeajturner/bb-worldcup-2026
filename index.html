@@ -239,21 +239,75 @@
     box-shadow: 0 8px 32px rgba(59,191,173,0.15);
     border-color: var(--bb-teal);
   }
-  .team-card-flag {
+  .team-card-hero {
     width: 100%;
-    aspect-ratio: 4/3;
-    object-fit: cover;
-    display: block;
+    aspect-ratio: 1/1;
     background: var(--bb-mid);
-  }
-  .team-card-flag-placeholder {
-    width: 100%;
-    aspect-ratio: 4/3;
-    background: var(--bb-mid);
+    position: relative;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+  .hero-avatar {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 4rem;
+    font-weight: 700;
+    color: white;
+    background: linear-gradient(135deg, var(--bb-teal) 0%, var(--bb-teal-dark) 100%);
+    letter-spacing: 2px;
+  }
+  .hero-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(42,157,143,0.85);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+    opacity: 0;
+    transition: opacity 0.2s;
+    letter-spacing: 0.5px;
+  }
+  .team-card-hero:hover .hero-overlay { opacity: 1; }
+  .hero-unassigned {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
     font-size: 3rem;
+    color: var(--bb-muted);
+    width: 100%;
+    height: 100%;
+  }
+  .hero-unassigned span {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--bb-muted);
+  }
+  .hero-flag-badge {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    font-size: 1.4rem;
+    line-height: 1;
+    filter: drop-shadow(0 1px 3px rgba(0,0,0,0.3));
   }
   .team-card-body {
     padding: 12px 14px 14px;
@@ -274,11 +328,7 @@
     color: var(--bb-teal);
     margin-bottom: 8px;
   }
-  .team-person {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+  /* .team-person removed — avatar is now hero */
   .person-avatar-wrap {
     position: relative;
     flex-shrink: 0;
@@ -777,7 +827,7 @@
         <img src="https://www.birdandblendtea.com/cdn/shop/files/Bird-and-blend-tea-co-brand-logo.png?v=1683122128"
              alt="Bird &amp; Blend Tea Co." onerror="this.style.display='none'">
         <div class="header-logo-divider"></div>
-        <span class="header-logo-tagline">Office Sweepstake</span>
+        <span class="header-logo-tagline">Sweepstake</span>
       </div>
       <h1><span class="accent-teal">World Cup</span> <span class="accent-coral">2026</span> 🏆</h1>
       <p>Who's going to lift the trophy for Bird &amp; Blend? ☕⚽</p>
@@ -1060,26 +1110,22 @@ function renderTeams() {
 
       html += `
         <div class="team-card">
-          <div class="team-card-flag-placeholder">${flag}</div>
+          <div class="team-card-hero" onclick="${person ? `triggerPhotoUpload('${teamKey}')` : ''}" 
+               style="cursor:${person ? 'pointer' : 'default'}">
+            ${person ? `
+              <div class="hero-avatar">${avatarInner}</div>
+              <div class="hero-overlay">📷 ${photoData ? 'Change' : 'Add photo'}</div>
+              <input class="photo-input" type="file" id="photo_${teamKey}" accept="image/*"
+                onchange="handlePhotoUpload(event, '${team}')">
+            ` : `
+              <div class="hero-unassigned">${flag}<br><span>Unassigned</span></div>
+            `}
+            <div class="hero-flag-badge">${flag}</div>
+          </div>
           <div class="team-card-body">
             <div class="team-name">${team}</div>
             <div class="team-group">${group}</div>
-            <div class="team-person">
-              ${person ? `
-                <div class="person-avatar-wrap" onclick="triggerPhotoUpload('${teamKey}')" title="Click to add/change photo">
-                  <div class="person-avatar">${avatarInner}</div>
-                  <div class="avatar-overlay">📷</div>
-                  <input class="photo-input" type="file" id="photo_${teamKey}" accept="image/*"
-                    onchange="handlePhotoUpload(event, '${team}')">
-                </div>
-                <div class="person-info">
-                  <div class="person-name">${person}</div>
-                  <div class="photo-hint" onclick="triggerPhotoUpload('${teamKey}')">
-                    ${photoData ? '✏️ Change photo' : '📷 Add photo'}
-                  </div>
-                </div>
-              ` : `<span class="unassigned-badge">Unassigned</span>`}
-            </div>
+            ${person ? `<div class="person-name-row">${person}</div>` : ''}
           </div>
         </div>`;
     });
